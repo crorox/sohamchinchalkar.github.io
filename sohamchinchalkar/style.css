@@ -473,6 +473,18 @@ main {
 .social-item .social-link:hover {
   color: var(--light-gray);
 }
+.social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    background-color: #fff0; /* transparent background if needed */
+    border-radius: 8px;
+    transition: opacity 0.2s ease;
+  }
+
+  .social-icon:hover {
+    opacity: 0.8;
+  }
 
 /* More Info Section (Email, Location) */
 .sidebar-info_more {
