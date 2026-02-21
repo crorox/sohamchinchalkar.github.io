@@ -16,7 +16,7 @@
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://docs.google.com/document/d/14yzusfmqWp9u1QiJ7xEHadAa-Sl9x_q3dKCAvswe7BQ/edit?tab=t.0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -534,7 +534,7 @@
           </div>
 
           <!-- Projects List -->
-          <li class="project-list">
+          <ul class="project-list">
           <li class="service-item">
               <div class="service-icon-box">
                 <img src="./sohamchinchalkar/pics/agenticai.jpeg"
@@ -542,17 +542,24 @@
               </div>
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">Agentic AI Knowledge Retriever</h4>
-                <p class="service-item-text">
-                  - Designed and implemented an agentic AI pipeline that autonomously retrieves and synthesizes information from URLs and CSVs using domain-aware indexing and LLM-based synthesis.<br>
-                  - Built a meta-agent to orchestrate chunking, embedding (SentenceTransformer MiniLM), domain clustering (KMeans), vector indexing (FAISS), and LLM querying (Gemini), incorporating Chain-of-Thought (CoT) reasoning for improved query understanding and answer generation.<br>
-                  - Developed a hybrid retrieval approach combining semantic vector search with keyword-based filtering to boost precision and recall in multi-domain environments.<br>
-                  - Achieved 5x faster semantic retrieval with per-domain FAISS indexing, supporting 50K+ text chunks across multiple topics.<br>
-                  - Integrated LLM-based synthesis to generate coherent, context-rich answers with >90% relevance, validated by cosine similarity and human feedback.<br>
-                  - Delivered an interactive Colab UI simulating a research assistant for real-time query and response.<br>
-                  - Engineered a modular system supporting extensions like multi-agent planning, feedback loops, and web deployment (advanced features).<br>
-                </p>
-
-                <a href="https://github.com/sohamchinchalkar/Agentic-AI-Knowledge-Retriever" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+                <div class="description-container">
+                  <div class="view-project-wrapper">
+                    <a href="https://github.com/sohamchinchalkar/Agentic-AI-Knowledge-Retriever" target="_blank" class="view-project-btn">View Project</a>
+                  </div>
+                  <div class="text-and-toggle">
+                    <p class="service-item-text truncated">
+                      - Designed and implemented an agentic AI pipeline that autonomously retrieves and synthesizes information from URLs and CSVs using domain-aware indexing and LLM-based synthesis.<br>
+                      - Built a meta-agent to orchestrate chunking, embedding (SentenceTransformer MiniLM), domain clustering (KMeans), vector indexing (FAISS), and LLM querying (Gemini), incorporating Chain-of-Thought (CoT) reasoning for improved query understanding and answer generation.<br>
+                      - Developed a hybrid retrieval approach combining semantic vector search with keyword-based filtering to boost precision and recall in multi-domain environments.<br>
+                      - Achieved 5x faster semantic retrieval with per-domain FAISS indexing, supporting 50K+ text chunks across multiple topics.<br>
+                      - Integrated LLM-based synthesis to generate coherent, context-rich answers with >90% relevance, validated by cosine similarity and human feedback.<br>
+                      - Delivered an interactive Colab UI simulating a research assistant for real-time query and response.<br>
+                      - Engineered a modular system supporting extensions like multi-agent planning, feedback loops, and web deployment (advanced features).<br>
+                    </p>
+                    <span class="show-more-text">...show more</span>
+                    <span class="show-less-text">...show less</span>
+                  </div>
+                </div>
               </div>
             </li>
             <li class="service-item">
@@ -565,17 +572,24 @@
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">An LLM Augmented Knowledge Graph System for E-commerce Insights</h4>
                 
-                <p class="service-item-text">
-                  - Developed an advanced Retrieval-Augmented Generation (RAG) system that integrates a knowledge graph to enhance natural language querying and insight generation in the e-commerce domain.<br>
-                  - Utilized the Amazon Sales Dataset from Kaggle, comprising over 100,000 structured records detailing product information, ratings, and reviews, to construct the foundational elements of the knowledge graph.<br>
-                  - Incorporated unstructured customer chat logs, totaling approximately 50,000 entries, to enrich the knowledge graph with real-world conversational data, capturing nuanced customer sentiments and inquiries.<br>
-                  - Engineered a pipeline leveraging a Large Language Model (LLM) to extract entities and relationships from both structured and unstructured data sources, facilitating the dynamic construction of a comprehensive knowledge graph using Neo4j.<br>
-                  - Implemented a mechanism where natural language queries are translated into Cypher queries via the LLM, enabling dynamic and context-aware retrieval of information from the knowledge graph.<br>
-                  - Enhanced the knowledge graph by incorporating inferred relationships and patterns suggested by the LLM, ensuring a richer and more interconnected dataset for analysis.<br>
-                  - Delivered a system capable of providing explainable and actionable insights, such as product recommendations and sales trends, thereby facilitating informed decision-making in e-commerce operations.<br>
-                </p>
-
-                <a href="https://github.com/sohamchinchalkar/An-LLM-Augmented-Knowledge-Graph-System-for-E-commerce-Insights" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+                <div class="description-container">
+                  <div class="view-project-wrapper">
+                    <a href="https://github.com/sohamchinchalkar/An-LLM-Augmented-Knowledge-Graph-System-for-E-commerce-Insights" target="_blank" class="view-project-btn">View Project</a>
+                  </div>
+                  <div class="text-and-toggle">
+                    <p class="service-item-text truncated">
+                      - Developed an advanced Retrieval-Augmented Generation (RAG) system that integrates a knowledge graph to enhance natural language querying and insight generation in the e-commerce domain.<br>
+                      - Utilized the Amazon Sales Dataset from Kaggle, comprising over 100,000 structured records detailing product information, ratings, and reviews, to construct the foundational elements of the knowledge graph.<br>
+                      - Incorporated unstructured customer chat logs, totaling approximately 50,000 entries, to enrich the knowledge graph with real-world conversational data, capturing nuanced customer sentiments and inquiries.<br>
+                      - Engineered a pipeline leveraging a Large Language Model (LLM) to extract entities and relationships from both structured and unstructured data sources, facilitating the dynamic construction of a comprehensive knowledge graph using Neo4j.<br>
+                      - Implemented a mechanism where natural language queries are translated into Cypher queries via the LLM, enabling dynamic and context-aware retrieval of information from the knowledge graph.<br>
+                      - Enhanced the knowledge graph by incorporating inferred relationships and patterns suggested by the LLM, ensuring a richer and more interconnected dataset for analysis.<br>
+                      - Delivered a system capable of providing explainable and actionable insights, such as product recommendations and sales trends, thereby facilitating informed decision-making in e-commerce operations.<br>
+                    </p>
+                    <span class="show-more-text">...show more</span>
+                    <span class="show-less-text">...show less</span>
+                  </div>
+                </div>
               </div>
             </li>
           
@@ -589,15 +603,22 @@
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">Airbnb Visualization - Tableau Dashboard</h4>
                 
-                <p class="service-item-text">
-                  - Used official Airbnb listings data for New York City, analyzing over 48,000 entries, and performed comprehensive data cleaning and structuring using Tableau Prep Builder.<br>
-                  - Leveraged advanced Tableau capabilities including calculated join keys, table calculations, geospatial mapping and dynamic interactivity to enable drill-downs, filters, and responsive visuals.<br>
-                  - Designed a user-centric dashboard addressing the needs of travelers, travel agents, and property managers, enabling insights into top neighborhoods with over 3,000 listings each.<br>
-                  - Applied optimal data-ink ratio principles to maintain visual clarity, highlighting key metrics such as price distribution (from <$50 to >$1,000) and review score variations (with top neighborhoods scoring above 4.8).<br>
-                  - Revealed actionable insights on market trends, guest satisfaction, and host behavior—showing that over 70% of listings are managed by multi-property hosts—supporting strategic pricing and listing optimization.<br>
-                </p>
-
-                <a href="https://public.tableau.com/app/profile/soham.chinchalkar/viz/FinalProject_17461472438010/Dashboard1?publish=yes" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+                <div class="description-container">
+                  <div class="view-project-wrapper">
+                    <a href="https://public.tableau.com/app/profile/soham.chinchalkar/viz/FinalProject_17461472438010/Dashboard1?publish=yes" target="_blank" class="view-project-btn">View Project</a>
+                  </div>
+                  <div class="text-and-toggle">
+                    <p class="service-item-text truncated">
+                      - Used official Airbnb listings data for New York City, analyzing over 48,000 entries, and performed comprehensive data cleaning and structuring using Tableau Prep Builder.<br>
+                      - Leveraged advanced Tableau capabilities including calculated join keys, table calculations, geospatial mapping and dynamic interactivity to enable drill-downs, filters, and responsive visuals.<br>
+                      - Designed a user-centric dashboard addressing the needs of travelers, travel agents, and property managers, enabling insights into top neighborhoods with over 3,000 listings each.<br>
+                      - Applied optimal data-ink ratio principles to maintain visual clarity, highlighting key metrics such as price distribution (from <$50 to >$1,000) and review score variations (with top neighborhoods scoring above 4.8).<br>
+                      - Revealed actionable insights on market trends, guest satisfaction, and host behavior—showing that over 70% of listings are managed by multi-property hosts—supporting strategic pricing and listing optimization.<br>
+                    </p>
+                    <span class="show-more-text">...show more</span>
+                    <span class="show-less-text">...show less</span>
+                  </div>
+                </div>
               </div>
             </li>
 
@@ -611,14 +632,21 @@
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">An Innovative Keylogger Detection System Using Machine Learning Algorithms and Dendritic Cell Algorithm </h4>
                 
-                <p class="service-item-text">
-                  - The research addresses privacy and security challenges, particularly focusing on detecting software keyloggers using a hybrid system that combines the Dendritic Cell Algorithm (DCA) with Machine Learning Algorithms (MLA) to improve detection accuracy.<br>
-                  - The proposed system, especially the SVM-NB-DCA approach, demonstrated high effectiveness, achieving an accuracy of 99.8% in keylogger detection, highlighting its potential as a robust solution for enhancing system security against keyloggers.<br>
-                  - Engineered using Python, Supervised Algorithms, Data Analytics.<br>
-                  - <strong>Patent</strong> application is in process. <strong>Architecture Copyright</strong> received from <strong>Goverment of India.</strong><br>
-                </p>
-
-                <a href="https://doi.org/10.18280/ria.380128" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+                <div class="description-container">
+                  <div class="view-project-wrapper">
+                    <a href="https://doi.org/10.18280/ria.380128" target="_blank" class="view-project-btn">View Project</a>
+                  </div>
+                  <div class="text-and-toggle">
+                    <p class="service-item-text truncated">
+                      - The research addresses privacy and security challenges, particularly focusing on detecting software keyloggers using a hybrid system that combines the Dendritic Cell Algorithm (DCA) with Machine Learning Algorithms (MLA) to improve detection accuracy.<br>
+                      - The proposed system, especially the SVM-NB-DCA approach, demonstrated high effectiveness, achieving an accuracy of 99.8% in keylogger detection, highlighting its potential as a robust solution for enhancing system security against keyloggers.<br>
+                      - Engineered using Python, Supervised Algorithms, Data Analytics.<br>
+                      - <strong>Patent</strong> application is in process. <strong>Architecture Copyright</strong> received from <strong>Goverment of India.</strong><br>
+                    </p>
+                    <span class="show-more-text">...show more</span>
+                    <span class="show-less-text">...show less</span>
+                  </div>
+                </div>
               </div>
             </li>
 
@@ -632,13 +660,21 @@
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">A Fraud Detection System in Financial Networks Using AntiBenford Subgraphs and Machine Learning Algorithms</h4>
                 
-                <p class="service-item-text">
-                  - The research addresses financial fraud detection in banking systems by combining graph mining based on Benford's Law with unsupervised Machine Learning Algorithms (MLA) to reduce false positives and enhance accuracy.<br>
-                  - The Fraud Detection System, leveraging Benford's Law and MLA, achieves a 94.83% accuracy rate in detecting anomalies, contributing significantly to early fraud detection and improving financial security.<br>
-                  - Engineered using Python, AI Methodologies, Data Analytics with the help of domain experts <br>
-                  - <strong>Patent</strong> application is in process. <strong>Architecture Copyright</strong> received from <strong>Goverment of India.</strong><br>
-                </p>
-                <a href="https://ieeexplore.ieee.org/document/10390325" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+                <div class="description-container">
+                  <div class="view-project-wrapper">
+                    <a href="https://ieeexplore.ieee.org/document/10390325" target="_blank" class="view-project-btn">View Project</a>
+                  </div>
+                  <div class="text-and-toggle">
+                    <p class="service-item-text truncated">
+                      - The research addresses financial fraud detection in banking systems by combining graph mining based on Benford's Law with unsupervised Machine Learning Algorithms (MLA) to reduce false positives and enhance accuracy.<br>
+                      - The Fraud Detection System, leveraging Benford's Law and MLA, achieves a 94.83% accuracy rate in detecting anomalies, contributing significantly to early fraud detection and improving financial security.<br>
+                      - Engineered using Python, AI Methodologies, Data Analytics with the help of domain experts <br>
+                      - <strong>Patent</strong> application is in process. <strong>Architecture Copyright</strong> received from <strong>Goverment of India.</strong><br>
+                    </p>
+                    <span class="show-more-text">...show more</span>
+                    <span class="show-less-text">...show less</span>
+                  </div>
+                </div>
               </div>
             </li>
             <li class="service-item">
@@ -651,11 +687,19 @@
             <div class="service-content-box">
               <h4 class="h4 service-item-title">Real-Time Temperature Visualization and Simulation</h4>
               
-              <p class="service-item-text">
-                - Built a real-time weather simulation that visualizes temperature data with interactive graphs and animations. Users can see live weather changes based on current temperature.<br>
-                - Integrated the weather API to fetch live temperature data and used D3.js, JavaScript, GitHub Pages to make this responsive webbased app update in real time for an interactive dynamic user experience.<br>
-              </p>
-              <a href="https://sohamchinchalkar.github.io/RealTimeClimatrix/" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+              <div class="description-container">
+                <div class="view-project-wrapper">
+                  <a href="https://sohamchinchalkar.github.io/RealTimeClimatrix/" target="_blank" class="view-project-btn">View Project</a>
+                </div>
+                <div class="text-and-toggle">
+                  <p class="service-item-text truncated">
+                    - Built a real-time weather simulation that visualizes temperature data with interactive graphs and animations. Users can see live weather changes based on current temperature.<br>
+                    - Integrated the weather API to fetch live temperature data and used D3.js, JavaScript, GitHub Pages to make this responsive webbased app update in real time for an interactive dynamic user experience.<br>
+                  </p>
+                  <span class="show-more-text">...show more</span>
+                  <span class="show-less-text">...show less</span>
+                </div>
+              </div>
             </div>
           </li>
           <li class="service-item">
@@ -668,21 +712,25 @@
             <div class="service-content-box">
               <h4 class="h4 service-item-title">Advanced Library Management System</h4>
               
-              <p class="service-item-text">
-                - Designed and implemented a comprehensive Library Management System using MySQL, optimizing database performance and ensuring seamless book tracking, user management, and borrowing/returning functionalities.<br>
-                - Applied advanced database management techniques to structure relational data efficiently, enforcing constraints and indexing to accelerate query performance and maintain data integrity.<br>
-                - Developed custom SQL queries to enable real-time book search, automated reporting, and tracking of overdue fines, significantly enhancing administrative efficiency and user experience.<br>
-                - Implemented dynamic pricing for overdue fines and late fees based on demand and book availability, encouraging timely returns and better resource utilization.<br>
-                - Implemented a personalized book recommendation system using the K-Nearest Neighbors (KNN) algorithm, analyzing user borrowing history to suggest relevant books on the user portal and enhance engagement.<br>
-              </p>
-              <a href="https://github.com/sohamchinchalkar/Advanced-Library-Management-System" target="_blank" class="title" style="margin-top: 20px; background-color: #5fd1e3; color: black;">View Project</a>
+              <div class="description-container">
+                <div class="view-project-wrapper">
+                  <a href="https://github.com/sohamchinchalkar/Advanced-Library-Management-System" target="_blank" class="view-project-btn">View Project</a>
+                </div>
+                <div class="text-and-toggle">
+                  <p class="service-item-text truncated">
+                    - Designed and implemented a comprehensive Library Management System using MySQL, optimizing database performance and ensuring seamless book tracking, user management, and borrowing/returning functionalities.<br>
+                    - Applied advanced database management techniques to structure relational data efficiently, enforcing constraints and indexing to accelerate query performance and maintain data integrity.<br>
+                    - Developed custom SQL queries to enable real-time book search, automated reporting, and tracking of overdue fines, significantly enhancing administrative efficiency and user experience.<br>
+                    - Implemented dynamic pricing for overdue fines and late fees based on demand and book availability, encouraging timely returns and better resource utilization.<br>
+                    - Implemented a personalized book recommendation system using the K-Nearest Neighbors (KNN) algorithm, analyzing user borrowing history to suggest relevant books on the user portal and enhance engagement.<br>
+                  </p>
+                  <span class="show-more-text">...show more</span>
+                  <span class="show-less-text">...show less</span>
+                </div>
+              </div>
             </div>
           </li>
-
-              </div>
-            </li>
-
-          </li>
+          </ul>
 
         </section>
 
@@ -747,9 +795,8 @@
                 <div class="research-content">
 
                   <h3 class="h3 research-item-title">My SCOPUS Profile</h3>
-                  <p style="color: white;">SCOPUS Indexed Research Papers</p>
-                  <br>
-                  <p style="color: white;">(Click Here)</p>
+                  <p class="research-subtitle">SCOPUS Indexed Research Papers</p>
+                  <p class="research-cta">(Click Here)</p>
                 </div>
 
               </a>

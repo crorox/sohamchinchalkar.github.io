@@ -224,3 +224,36 @@ function sendEmail() {
     alert("mail sent successfully" + message);
   });
 }
+
+// Show more functionality for project descriptions
+const showMoreTexts = document.querySelectorAll('.show-more-text');
+const showLessTexts = document.querySelectorAll('.show-less-text');
+
+showMoreTexts.forEach(span => {
+  span.addEventListener('click', function() {
+    const container = this.closest('.text-and-toggle');
+    const textP = container.querySelector('.service-item-text');
+    const showMore = container.querySelector('.show-more-text');
+    const showLess = container.querySelector('.show-less-text');
+    
+    textP.classList.remove('truncated');
+    textP.classList.add('full');
+    showMore.style.display = 'none';
+    showLess.style.display = 'inline';
+    showLess.style.marginLeft = '5px';
+  });
+});
+
+showLessTexts.forEach(span => {
+  span.addEventListener('click', function() {
+    const container = this.closest('.text-and-toggle');
+    const textP = container.querySelector('.service-item-text');
+    const showMore = container.querySelector('.show-more-text');
+    const showLess = container.querySelector('.show-less-text');
+    
+    textP.classList.remove('full');
+    textP.classList.add('truncated');
+    showLess.style.display = 'none';
+    showMore.style.display = 'inline';
+  });
+});
