@@ -4,6 +4,37 @@ function toggleClass(el, className) {
   if (el) el.classList.toggle(className);
 }
 
+function collapseAllProjectCards() {
+  const containers = document.querySelectorAll('.projects .text-and-toggle');
+  containers.forEach(function (container) {
+    const textP = container.querySelector('.service-item-text');
+    const showMore = container.querySelector('.show-more-text');
+    const showLess = container.querySelector('.show-less-text');
+    if (!textP || !showMore || !showLess) return;
+
+    textP.classList.remove('full');
+    textP.classList.add('truncated');
+    showMore.style.display = 'inline';
+    showLess.style.display = 'none';
+  });
+}
+
+let projectCollapseTimer = null;
+
+function startProjectCollapseTimer() {
+  if (projectCollapseTimer) clearTimeout(projectCollapseTimer);
+  projectCollapseTimer = setTimeout(function () {
+    collapseAllProjectCards();
+    projectCollapseTimer = null;
+  }, 7000);
+}
+
+function cancelProjectCollapseTimer() {
+  if (!projectCollapseTimer) return;
+  clearTimeout(projectCollapseTimer);
+  projectCollapseTimer = null;
+}
+
 // Sidebar toggle (mobile)
 const sidebar = document.querySelector('[data-sidebar]');
 const sidebarBtn = document.querySelector('[data-sidebar-btn]');
@@ -20,6 +51,8 @@ const pages = document.querySelectorAll('[data-page]');
 if (navigationLinks.length && pages.length) {
   navigationLinks.forEach(function (link) {
     link.addEventListener('click', function () {
+      const activePage = document.querySelector('[data-page].active');
+      const wasOnProjects = !!(activePage && activePage.dataset.page === 'projects');
       const target = link.textContent.trim().toLowerCase();
 
       pages.forEach(function (page) {
@@ -30,6 +63,11 @@ if (navigationLinks.length && pages.length) {
         nav.classList.toggle('active', nav === link);
       });
 
+      if (wasOnProjects && target !== 'projects') {
+        startProjectCollapseTimer();
+      } else if (target === 'projects') {
+        cancelProjectCollapseTimer();
+      }
       window.scrollTo(0, 0);
     });
   });
