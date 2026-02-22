@@ -375,7 +375,7 @@ article.active {
 /* Main (Change BG Color to White to understand how much area it covers!)*/
 main {
   margin: 15px 12px;
-  margin-bottom: 75px;
+  margin-bottom: calc(120px + env(safe-area-inset-bottom));
   min-width: 259px;
   /* background-color: white; */
 }
@@ -2242,8 +2242,29 @@ main {
    */
 
   .project-list {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 25px;
+    row-gap: 0;
     align-items: start;
+  }
+
+  .project-column-holder {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project-column {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-column .service-item {
+    margin-bottom: 0;
   }
 
   .projects .service-item {

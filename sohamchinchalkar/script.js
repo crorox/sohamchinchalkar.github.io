@@ -50,20 +50,32 @@ accordions.forEach(function (acc) {
 const showMoreTexts = document.querySelectorAll('.show-more-text');
 const showLessTexts = document.querySelectorAll('.show-less-text');
 
+function setExpandedState(container, expanded) {
+  const textP = container.querySelector('.service-item-text');
+  const showMore = container.querySelector('.show-more-text');
+  const showLess = container.querySelector('.show-less-text');
+  if (!textP || !showMore || !showLess) return;
+
+  textP.classList.toggle('full', expanded);
+  textP.classList.toggle('truncated', !expanded);
+  showMore.style.display = expanded ? 'none' : 'inline';
+  showLess.style.display = expanded ? 'inline' : 'none';
+}
+
+function collapseOtherProjectCards(activeContainer) {
+  const allContainers = document.querySelectorAll('.projects .text-and-toggle');
+  allContainers.forEach(function (container) {
+    if (container !== activeContainer) setExpandedState(container, false);
+  });
+}
+
 showMoreTexts.forEach(function (span) {
   span.addEventListener('click', function () {
     const container = span.closest('.text-and-toggle');
     if (!container) return;
 
-    const textP = container.querySelector('.service-item-text');
-    const showMore = container.querySelector('.show-more-text');
-    const showLess = container.querySelector('.show-less-text');
-    if (!textP || !showMore || !showLess) return;
-
-    textP.classList.remove('truncated');
-    textP.classList.add('full');
-    showMore.style.display = 'none';
-    showLess.style.display = 'inline';
+    collapseOtherProjectCards(container);
+    setExpandedState(container, true);
   });
 });
 
@@ -72,17 +84,73 @@ showLessTexts.forEach(function (span) {
     const container = span.closest('.text-and-toggle');
     if (!container) return;
 
-    const textP = container.querySelector('.service-item-text');
-    const showMore = container.querySelector('.show-more-text');
-    const showLess = container.querySelector('.show-less-text');
-    if (!textP || !showMore || !showLess) return;
-
-    textP.classList.remove('full');
-    textP.classList.add('truncated');
-    showLess.style.display = 'none';
-    showMore.style.display = 'inline';
+    setExpandedState(container, false);
   });
 });
+
+// Keep project cards in fixed desktop columns so expansion does not reorder cards.
+const projectList = document.querySelector('.projects .project-list');
+const originalProjectItems = projectList
+  ? Array.from(projectList.children).filter(function (child) {
+      return child.classList && child.classList.contains('service-item');
+    })
+  : [];
+let desktopColumnsMounted = false;
+let leftColumnHolder = null;
+let rightColumnHolder = null;
+
+function mountDesktopProjectColumns() {
+  if (!projectList || desktopColumnsMounted || !originalProjectItems.length) return;
+
+  leftColumnHolder = document.createElement('li');
+  leftColumnHolder.className = 'project-column-holder';
+  const leftColumn = document.createElement('ul');
+  leftColumn.className = 'project-column';
+  leftColumnHolder.appendChild(leftColumn);
+
+  rightColumnHolder = document.createElement('li');
+  rightColumnHolder.className = 'project-column-holder';
+  const rightColumn = document.createElement('ul');
+  rightColumn.className = 'project-column';
+  rightColumnHolder.appendChild(rightColumn);
+
+  projectList.appendChild(leftColumnHolder);
+  projectList.appendChild(rightColumnHolder);
+
+  originalProjectItems.forEach(function (item, index) {
+    if (index % 2 === 0) {
+      leftColumn.appendChild(item);
+    } else {
+      rightColumn.appendChild(item);
+    }
+  });
+
+  desktopColumnsMounted = true;
+}
+
+function mountMobileProjectList() {
+  if (!projectList || !desktopColumnsMounted) return;
+
+  if (leftColumnHolder) leftColumnHolder.remove();
+  if (rightColumnHolder) rightColumnHolder.remove();
+
+  originalProjectItems.forEach(function (item) {
+    projectList.appendChild(item);
+  });
+
+  desktopColumnsMounted = false;
+}
+
+function syncProjectLayout() {
+  if (window.innerWidth >= 1024) {
+    mountDesktopProjectColumns();
+  } else {
+    mountMobileProjectList();
+  }
+}
+
+syncProjectLayout();
+window.addEventListener('resize', syncProjectLayout);
 
 // Contact helper retained only if form exists
 function sendEmail() {
