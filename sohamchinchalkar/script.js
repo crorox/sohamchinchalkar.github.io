@@ -219,6 +219,31 @@ if (navigationLinks.length && pages.length) {
   window.addEventListener('resize', syncActiveNavFromScroll);
 }
 
+const backToTopBtn = document.querySelector('[data-back-to-top]');
+const aboutSection = document.querySelector('[data-page="about"]');
+
+function syncBackToTopVisibility() {
+  if (!backToTopBtn || !aboutSection) return;
+
+  const navbar = document.querySelector('.navbar');
+  const navbarOffset = navbar ? navbar.offsetHeight : 0;
+  const aboutBottom = window.scrollY + aboutSection.getBoundingClientRect().bottom;
+  const triggerPoint = window.scrollY + navbarOffset + 20;
+  const shouldShow = aboutBottom <= triggerPoint;
+
+  backToTopBtn.classList.toggle('visible', shouldShow);
+}
+
+if (backToTopBtn) {
+  backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', syncBackToTopVisibility, { passive: true });
+  window.addEventListener('resize', syncBackToTopVisibility);
+  syncBackToTopVisibility();
+}
+
 // Accordion support (if present)
 const accordions = document.querySelectorAll('.accordion');
 accordions.forEach(function (acc) {
