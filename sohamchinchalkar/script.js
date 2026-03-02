@@ -44,33 +44,91 @@ if (sidebar && sidebarBtn) {
   });
 }
 
+function syncSidebarState() {
+  if (!sidebar) return;
+
+  // "active" is mobile-only. Clear it when returning to desktop.
+  if (window.innerWidth >= 1250) {
+    sidebar.classList.remove('active');
+  }
+}
+
 // Page navigation
 const navigationLinks = document.querySelectorAll('[data-nav-link]');
 const pages = document.querySelectorAll('[data-page]');
+let activePageName = '';
 
 if (navigationLinks.length && pages.length) {
+  function setActiveNav(targetPageName) {
+    if (!targetPageName || activePageName === targetPageName) return;
+
+    navigationLinks.forEach(function (nav) {
+      const navTarget = nav.textContent.trim().toLowerCase();
+      nav.classList.toggle('active', navTarget === targetPageName);
+    });
+
+    if (activePageName === 'projects' && targetPageName !== 'projects') {
+      startProjectCollapseTimer();
+    } else if (targetPageName === 'projects') {
+      cancelProjectCollapseTimer();
+    }
+
+    activePageName = targetPageName;
+  }
+
+  function getPageByName(pageName) {
+    return Array.from(pages).find(function (page) {
+      return page.dataset.page === pageName;
+    });
+  }
+
+  function scrollToPage(pageName) {
+    const page = getPageByName(pageName);
+    if (!page) return;
+
+    const navbar = document.querySelector('.navbar');
+    const navbarOffset = navbar ? navbar.offsetHeight : 0;
+    const pageTop = window.scrollY + page.getBoundingClientRect().top - navbarOffset - 20;
+
+    window.scrollTo({
+      top: pageTop,
+      behavior: 'smooth'
+    });
+  }
+
+  function syncActiveNavFromScroll() {
+    const navbar = document.querySelector('.navbar');
+    const navbarOffset = navbar ? navbar.offsetHeight : 0;
+    const triggerY = navbarOffset + 72;
+    let currentPage = pages[0];
+
+    pages.forEach(function (page) {
+      const rect = page.getBoundingClientRect();
+      if (rect.top <= triggerY) currentPage = page;
+    });
+
+    if (currentPage) setActiveNav(currentPage.dataset.page);
+  }
+
   navigationLinks.forEach(function (link) {
     link.addEventListener('click', function () {
-      const activePage = document.querySelector('[data-page].active');
-      const wasOnProjects = !!(activePage && activePage.dataset.page === 'projects');
       const target = link.textContent.trim().toLowerCase();
-
-      pages.forEach(function (page) {
-        page.classList.toggle('active', page.dataset.page === target);
-      });
-
-      navigationLinks.forEach(function (nav) {
-        nav.classList.toggle('active', nav === link);
-      });
-
-      if (wasOnProjects && target !== 'projects') {
-        startProjectCollapseTimer();
-      } else if (target === 'projects') {
-        cancelProjectCollapseTimer();
-      }
-      window.scrollTo(0, 0);
+      setActiveNav(target);
+      scrollToPage(target);
     });
   });
+
+  // Initialize nav state for single-scroll layout.
+  const initialActive = document.querySelector('.navbar-link.active');
+  if (initialActive) {
+    activePageName = initialActive.textContent.trim().toLowerCase();
+  } else if (pages[0]) {
+    setActiveNav(pages[0].dataset.page);
+  }
+
+  syncActiveNavFromScroll();
+  window.addEventListener('scroll', syncActiveNavFromScroll, { passive: true });
+  window.addEventListener('resize', syncActiveNavFromScroll);
 }
 
 // Accordion support (if present)
@@ -188,7 +246,11 @@ function syncProjectLayout() {
 }
 
 syncProjectLayout();
-window.addEventListener('resize', syncProjectLayout);
+syncSidebarState();
+window.addEventListener('resize', function () {
+  syncProjectLayout();
+  syncSidebarState();
+});
 
 // Contact helper retained only if form exists
 function sendEmail() {
