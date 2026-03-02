@@ -1674,26 +1674,26 @@ main {
   }
 
   .navbar-list {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 4px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0;
     overflow-x: hidden !important;
-    padding: 6px;
+    padding: 6px 8px;
   }
 
   .navbar-item {
-    flex: initial;
+    flex: 0 1 auto;
     min-width: 0;
   }
 
   .navbar-link {
-    width: 100%;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 9px 2px;
-    font-size: 12px;
+    padding: 9px 4px;
+    font-size: 11.5px;
   }
 
   .navbar-link::after {
