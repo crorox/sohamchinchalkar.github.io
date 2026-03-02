@@ -1664,6 +1664,31 @@ main {
     gap: 30px;
     margin: 18px 4px;
   }
+
+  .navbar-list {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 2px;
+    overflow-x: visible;
+    padding: 6px;
+  }
+
+  .navbar-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .navbar-link {
+    width: 100%;
+    text-align: center;
+    padding: 9px 4px;
+    font-size: 12px;
+  }
+
+  .navbar-link::after {
+    left: 7px;
+    right: 7px;
+  }
 }
 
 /**
