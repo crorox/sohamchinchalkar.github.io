@@ -1695,7 +1695,7 @@ main {
  * responsive larger than 450px screen
  */
 
-@media (min-width: 150px) {
+@media (min-width: 450px) {
   /**
    * client
    */
@@ -1718,7 +1718,7 @@ main {
  * responsive larger than 580px screen
  */
 
-@media (min-width: 180px) {
+@media (min-width: 580px) {
   /**
    * CUSTOM PROPERTY
    */
