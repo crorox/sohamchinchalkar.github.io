@@ -225,11 +225,8 @@ const aboutSection = document.querySelector('[data-page="about"]');
 function syncBackToTopVisibility() {
   if (!backToTopBtn || !aboutSection) return;
 
-  const navbar = document.querySelector('.navbar');
-  const navbarOffset = navbar ? navbar.offsetHeight : 0;
-  const aboutBottom = window.scrollY + aboutSection.getBoundingClientRect().bottom;
-  const triggerPoint = window.scrollY + navbarOffset + 20;
-  const shouldShow = aboutBottom <= triggerPoint;
+  const aboutTop = window.scrollY + aboutSection.getBoundingClientRect().top;
+  const shouldShow = window.scrollY >= aboutTop + 220;
 
   backToTopBtn.classList.toggle('visible', shouldShow);
 }
