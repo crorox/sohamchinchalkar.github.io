@@ -1693,6 +1693,11 @@ main {
     gap: 8px;
   }
 
+  .social-list {
+    justify-content: center;
+    padding-left: 0;
+  }
+
   .navbar-list {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1719,6 +1724,19 @@ main {
   .navbar-link::after {
     left: 6px;
     right: 6px;
+  }
+
+  .navbar-item:nth-child(3) .navbar-link {
+    margin-left: 2px;
+  }
+
+  .info_more-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .info_more-btn span {
+    font-size: 11px;
   }
 }
 
