@@ -60,7 +60,6 @@ let activePageName = '';
 let navClickTarget = '';
 let navClickInProgress = false;
 let navScrollSettleTimer = null;
-let navClickMinLockUntil = 0;
 
 if (navigationLinks.length && pages.length) {
   function setActiveNav(targetPageName) {
@@ -86,6 +85,15 @@ if (navigationLinks.length && pages.length) {
     });
   }
 
+  function releaseNavClickLock() {
+    navClickInProgress = false;
+    navClickTarget = '';
+    if (navScrollSettleTimer) {
+      clearTimeout(navScrollSettleTimer);
+      navScrollSettleTimer = null;
+    }
+  }
+
   function scrollToPage(pageName) {
     const page = getPageByName(pageName);
     if (!page) return;
@@ -106,10 +114,6 @@ if (navigationLinks.length && pages.length) {
     const triggerY = navbarOffset + 24;
 
     if (navClickInProgress && navClickTarget) {
-      if (Date.now() < navClickMinLockUntil) {
-        setActiveNav(navClickTarget);
-        return;
-      }
       setActiveNav(navClickTarget);
       return;
     }
@@ -144,7 +148,6 @@ if (navigationLinks.length && pages.length) {
       const target = link.textContent.trim().toLowerCase();
       navClickTarget = target;
       navClickInProgress = true;
-      navClickMinLockUntil = Date.now() + 1200;
       if (navScrollSettleTimer) clearTimeout(navScrollSettleTimer);
       setActiveNav(target);
       scrollToPage(target);
@@ -168,14 +171,51 @@ if (navigationLinks.length && pages.length) {
       if (!navClickInProgress) return;
       if (navScrollSettleTimer) clearTimeout(navScrollSettleTimer);
       navScrollSettleTimer = setTimeout(function () {
-        if (Date.now() < navClickMinLockUntil) return;
-        navClickInProgress = false;
-        navClickTarget = '';
+        releaseNavClickLock();
         syncActiveNavFromScroll();
-      }, 420);
+      }, 220);
     },
     { passive: true }
   );
+
+  window.addEventListener(
+    'wheel',
+    function () {
+      if (!navClickInProgress) return;
+      releaseNavClickLock();
+      syncActiveNavFromScroll();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'touchmove',
+    function () {
+      if (!navClickInProgress) return;
+      releaseNavClickLock();
+      syncActiveNavFromScroll();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener('keydown', function (event) {
+    if (!navClickInProgress) return;
+
+    const key = event.key;
+    const isScrollKey =
+      key === 'ArrowDown' ||
+      key === 'ArrowUp' ||
+      key === 'PageDown' ||
+      key === 'PageUp' ||
+      key === 'Home' ||
+      key === 'End' ||
+      key === ' ';
+
+    if (!isScrollKey) return;
+    releaseNavClickLock();
+    syncActiveNavFromScroll();
+  });
+
   window.addEventListener('resize', syncActiveNavFromScroll);
 }
 

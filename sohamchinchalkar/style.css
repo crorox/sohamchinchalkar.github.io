@@ -2625,6 +2625,18 @@ main {
     padding: 9px 2px !important;
   }
 
+  .navbar-item:nth-child(3) .navbar-link {
+    margin-left: 2px;
+  }
+
+  .navbar-item:nth-child(4) .navbar-link {
+    margin-left: 2px;
+  }
+
+  .navbar-item:nth-child(5) .navbar-link {
+    margin-left: 1px;
+  }
+
   .info_more-btn {
     position: absolute !important;
     top: 0 !important;
