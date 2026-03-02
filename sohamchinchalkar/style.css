@@ -1674,22 +1674,25 @@ main {
   }
 
   .navbar-list {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 2px;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 4px;
     overflow-x: hidden !important;
     padding: 6px;
   }
 
   .navbar-item {
-    flex: 1 1 calc(100% / 6);
+    flex: initial;
     min-width: 0;
   }
 
   .navbar-link {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 9px 4px;
+    padding: 9px 2px;
     font-size: 12px;
   }
 
