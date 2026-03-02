@@ -389,7 +389,7 @@ main {
 }
 
 .sidebar.active {
-  max-height: 405px;
+  max-height: 780px;
 }
 
 .sidebar-info {
@@ -403,11 +403,19 @@ main {
 /* My Picture */
 .avatar-box {
   /* clip-path: inset(20px 0 0 0 round 30px); */
-  transform: translateY(-20px);
+  transform: none;
   border: 3px solid var(--jet);
-  width: 100%;
+  width: clamp(96px, 30vw, 130px);
+  flex-shrink: 0;
   height: auto;
-  margin-top: 5vh;
+  margin-top: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.avatar-box img {
+  width: 100%;
+  display: block;
 }
 
 /* Name */
@@ -1669,12 +1677,12 @@ main {
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: 2px;
-    overflow-x: visible;
+    overflow-x: hidden !important;
     padding: 6px;
   }
 
   .navbar-item {
-    flex: 1 1 0;
+    flex: 1 1 calc(100% / 6);
     min-width: 0;
   }
 
@@ -1695,7 +1703,7 @@ main {
  * responsive larger than 450px screen
  */
 
-@media (min-width: 450px) {
+@media (min-width: 150px) {
   /**
    * client
    */
@@ -1718,7 +1726,7 @@ main {
  * responsive larger than 580px screen
  */
 
-@media (min-width: 580px) {
+@media (min-width: 180px) {
   /**
    * CUSTOM PROPERTY
    */
@@ -1743,7 +1751,7 @@ main {
 
   .sidebar,
   article {
-    width: 520px;
+    width: min(520px, 100%);
     margin-inline: auto;
     padding: 30px;
   }

@@ -85,21 +85,13 @@ if (navigationLinks.length && pages.length) {
   function scrollToPage(pageName) {
     const page = getPageByName(pageName);
     if (!page) return;
-
-    const navbar = document.querySelector('.navbar');
-    const navbarOffset = navbar ? navbar.offsetHeight : 0;
-    const pageTop = window.scrollY + page.getBoundingClientRect().top - navbarOffset - 20;
-
-    window.scrollTo({
-      top: pageTop,
-      behavior: 'smooth'
-    });
+    page.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function syncActiveNavFromScroll() {
     const navbar = document.querySelector('.navbar');
     const navbarOffset = navbar ? navbar.offsetHeight : 0;
-    const triggerY = navbarOffset + 72;
+    const triggerY = navbarOffset + 24;
     let currentPage = pages[0];
 
     pages.forEach(function (page) {
