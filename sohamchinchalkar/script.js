@@ -57,8 +57,9 @@ function syncSidebarState() {
 const navigationLinks = document.querySelectorAll('[data-nav-link]');
 const pages = document.querySelectorAll('[data-page]');
 let activePageName = '';
-let navClickLockUntil = 0;
 let navClickTarget = '';
+let navClickInProgress = false;
+let navScrollSettleTimer = null;
 
 if (navigationLinks.length && pages.length) {
   function setActiveNav(targetPageName) {
@@ -87,7 +88,15 @@ if (navigationLinks.length && pages.length) {
   function scrollToPage(pageName) {
     const page = getPageByName(pageName);
     if (!page) return;
-    page.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const navbar = document.querySelector('.navbar');
+    const navbarOffset = navbar ? navbar.offsetHeight : 0;
+    const targetTop = window.scrollY + page.getBoundingClientRect().top - navbarOffset - 24;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: 'smooth'
+    });
   }
 
   function syncActiveNavFromScroll() {
@@ -95,26 +104,32 @@ if (navigationLinks.length && pages.length) {
     const navbarOffset = navbar ? navbar.offsetHeight : 0;
     const triggerY = navbarOffset + 24;
 
-    if (Date.now() < navClickLockUntil && navClickTarget) {
-      const targetPage = getPageByName(navClickTarget);
-      if (targetPage) {
-        const targetRect = targetPage.getBoundingClientRect();
-        if (targetRect.top <= triggerY + 2) {
-          navClickLockUntil = 0;
-          navClickTarget = '';
-        } else {
-          setActiveNav(navClickTarget);
-          return;
-        }
-      }
+    if (navClickInProgress && navClickTarget) {
+      setActiveNav(navClickTarget);
+      return;
     }
 
     let currentPage = pages[0];
+    let containingPage = null;
+    let closestPage = null;
+    let closestDistance = Number.POSITIVE_INFINITY;
 
     pages.forEach(function (page) {
       const rect = page.getBoundingClientRect();
-      if (rect.top <= triggerY) currentPage = page;
+      if (rect.top <= triggerY && rect.bottom > triggerY) containingPage = page;
+
+      const distance = Math.abs(rect.top - triggerY);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestPage = page;
+      }
     });
+
+    if (containingPage) {
+      currentPage = containingPage;
+    } else if (closestPage) {
+      currentPage = closestPage;
+    }
 
     if (currentPage) setActiveNav(currentPage.dataset.page);
   }
@@ -122,8 +137,9 @@ if (navigationLinks.length && pages.length) {
   navigationLinks.forEach(function (link) {
     link.addEventListener('click', function () {
       const target = link.textContent.trim().toLowerCase();
-      navClickLockUntil = Date.now() + 2000;
       navClickTarget = target;
+      navClickInProgress = true;
+      if (navScrollSettleTimer) clearTimeout(navScrollSettleTimer);
       setActiveNav(target);
       scrollToPage(target);
     });
@@ -138,7 +154,21 @@ if (navigationLinks.length && pages.length) {
   }
 
   syncActiveNavFromScroll();
-  window.addEventListener('scroll', syncActiveNavFromScroll, { passive: true });
+  window.addEventListener(
+    'scroll',
+    function () {
+      syncActiveNavFromScroll();
+
+      if (!navClickInProgress) return;
+      if (navScrollSettleTimer) clearTimeout(navScrollSettleTimer);
+      navScrollSettleTimer = setTimeout(function () {
+        navClickInProgress = false;
+        navClickTarget = '';
+        syncActiveNavFromScroll();
+      }, 140);
+    },
+    { passive: true }
+  );
   window.addEventListener('resize', syncActiveNavFromScroll);
 }
 
