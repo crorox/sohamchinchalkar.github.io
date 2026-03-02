@@ -208,6 +208,7 @@ html {
 }
 body {
   background: var(--smoky-black);
+  overflow-x: hidden;
 }
 
 /* Reused Styling Throughout Project */
@@ -435,8 +436,15 @@ main {
   font-size: var(--fs-8);
   font-weight: var(--fw-300);
   width: max-content;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
   padding: 3px 12px;
   border-radius: 8px;
+}
+
+.info-content {
+  min-width: 0;
 }
 
 /* Resume Button */
@@ -665,7 +673,7 @@ main {
 }
 
 .main-content article + article {
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 /*-----------------------------------*\
@@ -1673,32 +1681,44 @@ main {
     margin: 18px 4px;
   }
 
+  .skills-page .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .skills-page .skill-card {
+    min-width: 0;
+  }
+
+  .skills-page .skill-chip-list {
+    gap: 8px;
+  }
+
   .navbar-list {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0;
     overflow-x: hidden !important;
     padding: 6px 8px;
   }
 
   .navbar-item {
-    flex: 0 1 auto;
+    flex: initial;
     min-width: 0;
   }
 
   .navbar-link {
-    width: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 9px 4px;
-    font-size: 11.5px;
+    font-size: 11px;
   }
 
   .navbar-link::after {
-    left: 7px;
-    right: 7px;
+    left: 6px;
+    right: 6px;
   }
 }
 

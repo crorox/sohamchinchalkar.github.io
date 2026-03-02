@@ -57,6 +57,8 @@ function syncSidebarState() {
 const navigationLinks = document.querySelectorAll('[data-nav-link]');
 const pages = document.querySelectorAll('[data-page]');
 let activePageName = '';
+let navClickLockUntil = 0;
+let navClickTarget = '';
 
 if (navigationLinks.length && pages.length) {
   function setActiveNav(targetPageName) {
@@ -92,6 +94,21 @@ if (navigationLinks.length && pages.length) {
     const navbar = document.querySelector('.navbar');
     const navbarOffset = navbar ? navbar.offsetHeight : 0;
     const triggerY = navbarOffset + 24;
+
+    if (Date.now() < navClickLockUntil && navClickTarget) {
+      const targetPage = getPageByName(navClickTarget);
+      if (targetPage) {
+        const targetRect = targetPage.getBoundingClientRect();
+        if (targetRect.top <= triggerY + 2) {
+          navClickLockUntil = 0;
+          navClickTarget = '';
+        } else {
+          setActiveNav(navClickTarget);
+          return;
+        }
+      }
+    }
+
     let currentPage = pages[0];
 
     pages.forEach(function (page) {
@@ -105,6 +122,8 @@ if (navigationLinks.length && pages.length) {
   navigationLinks.forEach(function (link) {
     link.addEventListener('click', function () {
       const target = link.textContent.trim().toLowerCase();
+      navClickLockUntil = Date.now() + 2000;
+      navClickTarget = target;
       setActiveNav(target);
       scrollToPage(target);
     });
