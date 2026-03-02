@@ -1550,6 +1550,14 @@ main {
   background: hsla(0, 0%, 0%, 0.2);
 }
 
+.proof-badge a,
+.proof-badge a:visited,
+.proof-badge a:hover,
+.proof-badge a:active {
+  color: var(--white-2) !important;
+  text-decoration: none !important;
+}
+
 .research-cta a {
   color: var(--orange-yellow-crayola);
   text-decoration: underline;
