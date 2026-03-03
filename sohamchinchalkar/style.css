@@ -2376,6 +2376,25 @@ main {
   }
 
   /**
+   * SIDEBAR
+   */
+
+  .sidebar {
+    max-height: max-content;
+    overflow: visible;
+    padding: clamp(18px, 2vw, 28px);
+  }
+
+  .info_more-btn {
+    display: none;
+  }
+
+  .sidebar-info_more {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /**
    * NAVBAR
    */
 
@@ -2551,10 +2570,11 @@ main {
 
   .sidebar {
     position: sticky;
-    top: 60px;
+    top: clamp(20px, 3vh, 60px);
     max-height: max-content;
+    overflow: visible;
     margin-bottom: 0;
-    padding-top: 60px;
+    padding-top: clamp(20px, 3vh, 60px);
     z-index: 1;
   }
 
@@ -2563,7 +2583,7 @@ main {
   }
 
   .avatar-box img {
-    width: 220px;
+    width: clamp(150px, 20vh, 220px);
   }
 
   .info-content .name {
